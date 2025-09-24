@@ -1,260 +1,210 @@
-# SARA Asist## Inicio Rápido
+# SARA - Sistema de Asistencia y Registro de Actividad
 
-### Iniciar el Sistema (Interfa### Interfaz Web (Recomendado - Sin Instalar Nada Local)
-- **URL**: http://localhost:8000/asistente/
-- **Ventajas**: Funciona en cualquier navegador moderno
-- **No requiere**: Node.js, X11, VcXsrv, o instalación local
-- **Funcionalidad completa**: Login, monitoreo, consejos, chat
+SARA es un sistema completo de monitoreo de productividad y asistencia IA para equipos de trabajo, desarrollado con Django, PostgreSQL y Electron.
 
-### API REST (Para integraciones)
-- **Backend**: http://localhost:8000
-- **Admin**: http://localhost:8000/admin/
-- **API Docs**: Ver `CLIENTE_ESPECIFICACIONES.md``bash
-# Windows con PowerShell
-.\run-docker.ps1
+## 🚀 Inicio Rápido con Docker
 
-# Windows con CMD
-run-docker.bat
+### Prerrequisitos
 
-# Linux/Mac
-docker-compose up --build -d
-```Docker
+- Docker Desktop instalado y corriendo
+- Al menos 4GB de RAM disponible
+- Puertos 80 y 8000 libres
 
-# SARA Asistente Virtual - Docker
+### Configuración Inicial
 
-Esta aplicación contiene el backend Django con interfaz web completa empaquetado en contenedores Docker. **No requiere instalación de software adicional** - funciona directamente en el navegador.
+1. **Clona el repositorio:**
+   ```bash
+   git clone <url-del-repo>
+   cd saraianew
+   ```
 
-## 🚀 Inicio Rápido
+2. **Configuración completa automática:**
+   ```bash
+   # Esto construirá las imágenes, iniciará los servicios,
+   # creará un superusuario y poblará la DB con datos de ejemplo
+   ./init-docker.sh full-setup
+   ```
 
-### Opción 1: Interfaz Web (Recomendado - Sin Instalar Nada Local)
-
-```bash
-# Windows con PowerShell
-.\sara-docker.ps1 -Command start
-
-# Windows con CMD
-sara-docker.bat start
-
-# Linux/Mac
-docker-compose up -d backend
-```
-
-### Opción 2: Aplicación Electron (Solo Linux con GUI)
+### Comandos Útiles
 
 ```bash
-# Solo funciona en Linux con X11
-docker-compose --profile linux-gui up electron
+# Iniciar servicios
+./init-docker.sh start
+
+# Detener servicios
+./init-docker.sh stop
+
+# Ver logs en tiempo real
+./init-docker.sh logs
+
+# Acceder al shell del backend
+./init-docker.sh shell
+
+# Ejecutar comandos de Django
+./init-docker.sh manage migrate
+./init-docker.sh manage shell
+
+# Crear superusuario adicional
+./init-docker.sh superuser
+
+# Poblar DB con datos de ejemplo
+./init-docker.sh populate
+
+# Ver estado de servicios
+./init-docker.sh status
+
+# Limpieza completa
+./init-docker.sh clean
 ```
 
-### Opción 3: Sistema Completo (Backend + Electron)
+## 🌐 Acceso a la Aplicación
 
-```bash
-# Linux con GUI completa
-docker-compose --profile linux-gui up -d
-```
+Una vez iniciados los servicios:
 
-## 🎯 Acceso al Asistente Virtual
+- **Aplicación Web:** http://localhost
+- **API Backend:** http://localhost:8000
+- **Admin Django:** http://localhost:8000/admin/
+- **Asistente IA:** http://localhost/asistente/
 
-### Interfaz Web (Recomendado - Sin Instalar Nada Local)
-- **URL**: http://localhost:8000/asistente/web/
-- **Ventajas**: Funciona en cualquier navegador moderno
-- **No requiere**: Node.js, X11, VcXsrv, o instalación local
-- **Funcionalidad completa**: Login, monitoreo, consejos, chat
+### Credenciales por Defecto
 
-### Aplicación Electron (Solo Linux)
-- **Ventajas**: Interfaz nativa de escritorio
-- **Requiere**: Linux con X11 y display gráfico
-- **Limitación**: No funciona en Windows/Mac dentro de Docker
+- **Superusuario:** admin / admin (cambiar después del primer login)
+- **Usuario de ejemplo:** empleado1 / password123
 
-### API REST (Para integraciones)
-- **Backend**: http://localhost:8000
-- **Admin**: http://localhost:8000/admin/
+## 🏗️ Arquitectura
 
-## 🔐 Login del Cliente - Cómo Empezar el Monitoreo
-
-### Paso 1: Iniciar la Aplicación
-```bash
-# Iniciar el sistema
-run-docker.bat
-```
-
-### Paso 2: Acceder al Asistente Web
-- **URL**: http://localhost:8000/asistente/
-- **Abre en navegador**: Chrome, Firefox, Edge, Safari, etc.
-
-### Paso 3: Hacer Login
-1. **Ingresa tus credenciales**:
-   - Usuario: Tu nombre de usuario de SARA
-   - Contraseña: Tu contraseña
-
-2. **Haz clic en "Iniciar Monitoreo"**
-
-### Paso 4: Monitoreo Automático
-**¡Automáticamente sucede!**
-- ✅ **Monitoreo inicia** (cada 30 segundos)
-- ✅ **Consejos proactivos** (cada 2 minutos)
-- ✅ **Análisis de actividad** continuo
-- ✅ **Estadísticas actualizadas**
-
-### Paso 5: Usar el Asistente
-- **💡 Consejos**: Aparecen automáticamente basados en tu actividad
-- **💬 Chat**: Pregunta cualquier cosa al asistente IA
-- **📊 Estado**: Verde = monitoreando, Rojo = desconectado
-- **🚪 Salir**: Solo para cambiar de usuario
-
-## Servicios
-
-### Backend (Django)
-- **Puerto**: 8000
-- **Base de datos**: SQLite (persistente en `./db.sqlite3`)
-- **Interfaz Web**: http://localhost:8000/asistente/web/
-- **API Endpoints**:
-  - `/api/health/` - Health check
-  - `/api/login/` - Autenticación del cliente
-  - `/api/asistente/chat/` - Chat con IA
-  - `/api/consejos-proactivos/` - Consejos IA
-  - `/admin/` - Panel administrativo
-
-### Electron App (Solo Linux)
-- **Dependencia**: Backend saludable
-- **Interfaz**: Aplicación de escritorio nativa
-- **Requisitos**: Linux con X11
-- **Limitación**: No funciona en Windows/Mac dentro de Docker
-- **Comando**: `docker-compose --profile linux-gui up electron`
-
-## Comandos Útiles
-
-```bash
-# Usando los scripts de ayuda
-.\sara-docker.ps1 -Command start          # Iniciar backend
-.\sara-docker.ps1 -Command stop           # Detener servicios
-.\sara-docker.ps1 -Command logs           # Ver logs
-.\sara-docker.ps1 -Command status         # Ver estado
-.\sara-docker.ps1 -Command clean          # Limpiar contenedores
-
-# Comandos Docker directos
-docker-compose up -d backend              # Solo backend
-docker-compose --profile linux-gui up electron  # Solo Electron (Linux)
-docker-compose --profile linux-gui up     # Sistema completo (Linux)
-
-# Verificación y debugging
-docker-compose ps                         # Estado de contenedores
-docker-compose logs -f backend           # Logs del backend
-curl http://localhost:8000/api/health/   # Health check
-
-# Mantenimiento
-docker-compose down                      # Detener servicios
-docker-compose up --build --force-recreate  # Reconstruir
-docker-compose exec backend bash         # Acceder al contenedor
-```
-
-## Solución de Problemas
-
-### ❌ Error de conexión con backend
-```bash
-# Verificar backend saludable
-docker-compose ps
-curl http://localhost:8000/api/health/
-
-# Ver logs del backend
-docker-compose logs backend
-```
-
-### ❌ Cliente no puede hacer login
-```bash
-# Verificar credenciales en Django admin
-# Ir a: http://localhost:8000/admin/
-
-# Ver logs del backend
-docker-compose logs backend
-```
-
-### ❌ Aplicación Electron no inicia (Linux)
-```bash
-# Verificar que X11 esté disponible
-echo $DISPLAY
-
-# Verificar que Xvfb esté corriendo
-docker-compose logs electron
-
-# Verificar dependencias del sistema
-docker-compose exec electron apt list --installed | grep libgtk
-```
-
-### ❌ Problemas con la interfaz web
-```bash
-# Verificar que el navegador soporte JavaScript moderno
-# Limpiar caché del navegador
-# Intentar con un navegador diferente
-
-# Verificar logs del backend
-docker-compose logs backend
-```
-
-### ❌ Electron no puede conectar al backend
-```bash
-# Verificar que el backend esté saludable
-curl http://localhost:8000/api/health/
-
-# Verificar configuración de API_URL en Electron
-docker-compose exec electron env | grep API_URL
-
-# Verificar conectividad entre contenedores
-docker-compose exec electron curl http://backend:8000/api/health/
-```
-
-## Arquitectura Completa
-
-### Opción 1: Interfaz Web (Multiplataforma)
-```
-┌─────────────────┐    ┌─────────────────┐
-│   Web Browser   │◄──►│   Django API    │
-│  (Chrome/Firefox│    │   (Backend)     │
-│   /Edge/Safari) │    │                 │
-│                 │    │ • Autenticación │
-│ • Login UI      │    │ • Consejos IA   │
-│ • Monitoreo     │    │ • Chat IA       │
-│ • Chat          │    │ • Estadísticas  │
-│ • Notificaciones│    │ • Base de datos │
-└─────────────────┘    └─────────────────┘
-         │                       │
-         ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐
-│   System        │    │   SQLite DB     │
-│   Monitoring    │    │   (Persistent)  │
-│ (Backend APIs)  │    │                 │
-└─────────────────┘    └─────────────────┘
-```
-
-### Opción 2: Aplicación Electron (Solo Linux)
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Electron App   │◄──►│   Django API    │◄──►│   SQLite DB     │
-│  (Linux Native) │    │   (Backend)     │    │   (Persistent)  │
-│                 │    │                 │    │                 │
-│ • Desktop GUI   │    │ • Autenticación │    │ • User Data     │
-│ • System Tray   │    │ • Consejos IA   │    │ • Activity Logs │
-│ • Notifications │    │ • Chat IA       │    │ • Statistics    │
-│ • Auto-start    │    │ • Estadísticas  │    │                 │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │
-         ▼
-┌─────────────────┐
-│   System        │
-│   Monitoring    │
-│ (OS Integration)│
-└─────────────────┘
+│   Nginx (80)    │    │ Backend Django  │    │   PostgreSQL    │
+│                 │────│   (8000)        │────│                 │
+│  - Proxy        │    │  - REST API     │    │  - Datos        │
+│  - Static Files │    │  - Asistente IA │    │  - Usuarios     │
+└─────────────────┘    │  - Web App      │    └─────────────────┘
+                       └─────────────────┘             │
+┌─────────────────┐                           ┌─────────────────┐
+│ Electron Client │                           │   Volúmenes     │
+│                 │                           │  - staticfiles  │
+│  - GUI Desktop  │                           │  - media        │
+│  - Monitoreo    │                           │  - postgres_data│
+└─────────────────┘                           └─────────────────┘
 ```
 
-## Características del Sistema
+## 📁 Estructura del Proyecto
 
-- ✅ **Monitoreo continuo** sin controles de pausa
-- ✅ **Consejos IA proactivos** basados en actividad
-- ✅ **Interfaz web moderna** accesible desde cualquier navegador
-- ✅ **Login automático** inicia monitoreo
-- ✅ **Logout único** para cambio de usuario
-- ✅ **Contenedorizado** con Docker
-- ✅ **Base de datos persistente**
-- ✅ **Notificaciones del sistema**
-- ✅ **Chat con IA** integrado
-- ✅ **Sin instalación local** requerida
+```
+saraianew/
+├── core/                    # App principal de Django
+│   ├── models.py           # Modelos de datos
+│   ├── views.py            # Vistas y APIs
+│   ├── templates/          # Plantillas HTML
+│   └── static/             # Archivos estáticos
+├── sara/                   # Configuración de Django
+│   ├── settings.py         # Configuración principal
+│   ├── urls.py             # Rutas URL
+│   └── wsgi.py             # WSGI
+├── asistente-virtual/      # Cliente Electron
+│   ├── src/                # Código fuente
+│   ├── package.json        # Dependencias Node.js
+│   └── docker-entrypoint.sh
+├── docker-compose.yml      # Orquestación Docker
+├── Dockerfile.backend      # Imagen backend
+├── Dockerfile.electron     # Imagen cliente
+├── nginx.conf             # Configuración Nginx
+├── init-docker.sh         # Script de gestión
+└── requirements.txt       # Dependencias Python
+```
+
+## 🔧 Configuración Avanzada
+
+### Variables de Entorno
+
+Crea un archivo `.env` basado en `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+### Base de Datos
+
+Por defecto usa PostgreSQL. Para desarrollo con SQLite:
+
+```bash
+# En .env
+DATABASE_URL=sqlite:///db.sqlite3
+```
+
+### Desarrollo Local
+
+Para desarrollo sin Docker:
+
+```bash
+# Backend
+cd saraianew
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+
+# Cliente Electron (en otra terminal)
+cd asistente-virtual
+npm install
+npm start
+```
+
+## 📊 Características
+
+- ✅ **Monitoreo de Productividad:** Seguimiento de actividad en tiempo real
+- ✅ **Asistente IA:** Chat inteligente con recomendaciones personalizadas
+- ✅ **Dashboard Administrativo:** Gestión completa de usuarios y estadísticas
+- ✅ **API REST:** Endpoints para integración con otros sistemas
+- ✅ **Cliente Desktop:** Aplicación Electron para monitoreo local
+- ✅ **Base de Datos PostgreSQL:** Almacenamiento robusto y escalable
+- ✅ **Nginx Proxy:** Servidor web de alto rendimiento
+- ✅ **Docker Ready:** Despliegue simplificado con contenedores
+
+## 🧪 Testing
+
+```bash
+# Ejecutar tests
+./init-docker.sh manage test
+
+# Ejecutar tests con coverage
+./init-docker.sh manage test --verbosity=2
+```
+
+## 📝 API Documentation
+
+### Endpoints Principales
+
+- `GET /api/health/` - Health check
+- `POST /api/asistente/chat/` - Chat con IA
+- `GET /api/dashboard/` - Datos del dashboard
+- `GET /api/registros/` - Lista de registros
+
+### Autenticación
+
+La API usa JWT (JSON Web Tokens) para autenticación.
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+
+## 🆘 Soporte
+
+Si encuentras problemas:
+
+1. Verifica que Docker esté corriendo
+2. Revisa los logs: `./init-docker.sh logs`
+3. Verifica el estado: `./init-docker.sh status`
+4. Reinicia los servicios: `./init-docker.sh restart`
+
+Para más ayuda, abre un issue en el repositorio.

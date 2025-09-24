@@ -180,12 +180,24 @@
                                         <a href="{% url 'actividad_usuario_detail' emp_data.usuario.id %}" class="btn btn-sm btn-info" title="Ver actividad detallada">
                                             <i class="fas fa-chart-line"></i>
                                         </a>
-                                        <a href="{% url 'analisis_detail' emp_data.analisis_reciente.id %}" class="btn btn-sm btn-warning" title="Ver análisis IA" {% if not emp_data.analisis_reciente %}disabled{% endif %}>
+                                        {% if emp_data.analisis_reciente %}
+                                        <a href="{% url 'analisis_detail' emp_data.analisis_reciente.id %}" class="btn btn-sm btn-warning" title="Ver análisis IA">
                                             <i class="fas fa-brain"></i>
                                         </a>
-                                        <a href="{% url 'estadistica_detail' emp_data.estadistica.id %}" class="btn btn-sm btn-success" title="Ver estadísticas" {% if not emp_data.estadistica %}disabled{% endif %}>
+                                        {% else %}
+                                        <button class="btn btn-sm btn-warning" disabled title="Sin análisis disponible">
+                                            <i class="fas fa-brain"></i>
+                                        </button>
+                                        {% endif %}
+                                        {% if emp_data.estadistica %}
+                                        <a href="{% url 'estadistica_detail' emp_data.estadistica.id %}" class="btn btn-sm btn-success" title="Ver estadísticas">
                                             <i class="fas fa-chart-bar"></i>
                                         </a>
+                                        {% else %}
+                                        <button class="btn btn-sm btn-success" disabled title="Sin estadísticas disponibles">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </button>
+                                        {% endif %}
                                     </div>
                                 </td>
                             </tr>

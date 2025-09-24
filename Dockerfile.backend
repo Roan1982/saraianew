@@ -1,27 +1,50 @@
-# Dockerfile para el backend Django
+# Dockerfile optimizado para el backend Django de SARA
 FROM python:3.11-slim
+
+# Evitar prompts interactivos durante la instalación
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Instalar dependencias del sistema necesarias
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    libpq-dev \
+    curl \
+    netcat-traditional \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Crear usuario no-root para mayor seguridad
+RUN groupadd -r django && useradd -r -g django django
 
 # Establecer directorio de trabajo
 WORKDIR /app
 
-# Instalar dependencias del sistema
-RUN apt-get update && apt-get install -y \
-    gcc \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copiar requirements.txt e instalar dependencias de Python
+# Copiar requirements.txt primero para aprovechar cache de Docker
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
+# Instalar dependencias de Python
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Copiar el código de la aplicación
 COPY . .
 
-# Crear directorio para archivos estáticos
-RUN mkdir -p staticfiles
+# Crear directorios necesarios
+RUN mkdir -p staticfiles media logs && \
+    chown -R django:django /app
+
+# Cambiar a usuario no-root
+USER django
 
 # Exponer puerto
 EXPOSE 8000
 
-# Comando para ejecutar la aplicación
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8000/api/health/ || exit 1
+
+# Comando por defecto
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

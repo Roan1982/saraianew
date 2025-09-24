@@ -1,11 +1,33 @@
+# Django y REST Framework
 Django==5.2.6
 djangorestframework==3.15.2
+
+# Base de datos
+psycopg2-binary==2.9.9
+
+# Machine Learning y análisis de datos
 scikit-learn==1.5.2
 pandas==2.2.3
 nltk==3.9.1
+
+# Testing
 pytest==8.4.2
 pytest-django==4.11.1
+
+# HTTP requests y utilidades
 requests==2.32.3
 python-decouple==3.8
+
+# Producción
 gunicorn==23.0.0
 whitenoise==6.7.0
+
+# Desarrollo
+django-cors-headers==4.4.0
+djangorestframework-simplejwt==5.3.1
+
+# Configuración de base de datos desde URL
+dj-database-url==2.2.0
+
+# Logging y monitoreo
+structlog==24.1.0

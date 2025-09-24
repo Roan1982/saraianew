@@ -1,4 +1,4 @@
-# Dockerfile para la aplicación Electron
+﻿# Dockerfile para la aplicación Electron
 FROM node:18-bullseye
 
 # Instalar dependencias del sistema para Electron y X11
@@ -26,23 +26,21 @@ RUN apt-get update && apt-get install -y \
     libxfixes3 \
     curl \
     xvfb \
+    python3 \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # Establecer directorio de trabajo
 WORKDIR /app
 
-# Copiar package.json e instalar dependencias
-COPY asistente-virtual/package*.json ./
-RUN npm install
+# Copiar el código de la aplicación COMPLETO primero
+COPY asistente-virtual/ ./
+
+# Instalar dependencias de npm
+RUN npm cache clean --force && npm install --no-package-lock --no-audit --no-fund
 
 # Instalar Electron globalmente para que esté disponible en el PATH
 RUN npm install -g electron
-
-# Copiar el código de la aplicación
-COPY asistente-virtual/ .
-
-# Instalar dependencias nuevamente después de copiar todo el código
-RUN npm install
 
 # Hacer ejecutable el script de entrada
 RUN chmod +x docker-entrypoint.sh

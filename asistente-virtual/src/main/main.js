@@ -33,15 +33,29 @@ class SaraAsistenteVirtual {
     this.config = { ...defaultConfig, ...store.get('config', {}) };
     this.isAuthenticated = false;
     this.currentApp = null;
+    // Detectar si estamos en modo headless (Docker)
+    this.isHeadless = process.env.DOCKER_CONTAINER === 'true' || process.env.NODE_ENV === 'docker';
   }
 
   init() {
     app.whenReady().then(() => {
-      this.createTray();
-      this.createWindow();
+      if (!this.isHeadless) {
+        this.createTray();
+        this.createWindow();
+      } else {
+        console.log('🚀 Ejecutando en modo headless (Docker) - Sin interfaz gráfica');
+        console.log('🔍 Iniciando monitoreo automático...');
+        // En modo headless, no crear bandeja ni ventana
+      }
+
       this.setupIPC();
       this.startSystemMonitoring();
       this.startAdvicePolling();
+
+      // En modo headless, intentar login automático con credenciales de entorno
+      if (this.isHeadless) {
+        this.autoLogin();
+      }
     });
 
     app.on('window-all-closed', () => {
@@ -51,7 +65,7 @@ class SaraAsistenteVirtual {
     });
 
     app.on('activate', () => {
-      if (BrowserWindow.getAllWindows().length === 0) {
+      if (BrowserWindow.getAllWindows().length === 0 && !this.isHeadless) {
         this.createWindow();
       }
     });
@@ -228,16 +242,36 @@ class SaraAsistenteVirtual {
     });
 
     ipcMain.handle('minimize-window', () => {
-      if (mainWindow) {
+      if (mainWindow && !this.isHeadless) {
         mainWindow.minimize();
       }
     });
 
     ipcMain.handle('close-window', () => {
-      if (mainWindow) {
+      if (mainWindow && !this.isHeadless) {
         mainWindow.hide();
       }
     });
+  }
+
+  async autoLogin() {
+    // Intentar login automático con credenciales de entorno o por defecto
+    const username = process.env.SARA_USERNAME || 'admin';
+    const password = process.env.SARA_PASSWORD || 'admin123';
+
+    console.log(`🔐 Intentando login automático con usuario: ${username}`);
+
+    const result = await this.authenticate({ username, password });
+
+    if (result.success) {
+      console.log('✅ Login automático exitoso - Monitoreo iniciado');
+      console.log(`👤 Usuario: ${result.user.username} (${result.user.rol})`);
+      console.log('📊 El monitoreo está funcionando en background');
+    } else {
+      console.error('❌ Error en login automático:', result.error);
+      console.log('🔄 Reintentando en 30 segundos...');
+      setTimeout(() => this.autoLogin(), 30000);
+    }
   }
 
   async authenticate(credentials) {
@@ -346,6 +380,20 @@ class SaraAsistenteVirtual {
       if (!this.isAuthenticated) return;
 
       try {
+        if (this.isHeadless) {
+          // En modo headless, enviar actividad básica del sistema
+          console.log('📊 Monitoreo activo - Sistema funcionando en background');
+
+          // Enviar actividad básica al backend
+          await this.sendActivity({
+            ventana_activa: 'Sistema Docker',
+            aplicacion: 'SARA Monitor',
+            timestamp: new Date().toISOString(),
+            tipo: 'background_monitoring'
+          });
+          return;
+        }
+
         const activeWindow = await activeWin();
 
         if (activeWindow && activeWindow.owner.name !== this.currentApp) {
@@ -366,14 +414,17 @@ class SaraAsistenteVirtual {
               message: contextualAdvice
             });
 
-            // Enviar a la ventana del asistente
-            if (mainWindow && !mainWindow.isDestroyed()) {
+            // Enviar a la ventana del asistente solo si no estamos en modo headless
+            if (mainWindow && !mainWindow.isDestroyed() && !this.isHeadless) {
               mainWindow.webContents.send('contextual-advice', contextualAdvice);
             }
           }
         }
       } catch (error) {
-        console.error('Error monitoreando sistema:', error);
+        if (!this.isHeadless) {
+          console.error('Error monitoreando sistema:', error);
+        }
+        // En modo headless, ignorar errores de monitoreo silenciosamente
       }
     }, this.config.systemMonitorInterval);
   }
@@ -401,8 +452,8 @@ class SaraAsistenteVirtual {
           message: advice.substring(0, 100) + (advice.length > 100 ? '...' : '')
         });
 
-        // Enviar a la ventana del asistente
-        if (mainWindow && !mainWindow.isDestroyed()) {
+        // Enviar a la ventana del asistente solo si no estamos en modo headless
+        if (mainWindow && !mainWindow.isDestroyed() && !this.isHeadless) {
           mainWindow.webContents.send('proactive-advice', advice);
         }
       }
@@ -477,6 +528,13 @@ class SaraAsistenteVirtual {
 
   showNotification(notification) {
     if (!this.config.showNotifications) return;
+
+    if (this.isHeadless) {
+      // En modo headless, mostrar notificaciones como logs
+      console.log(`🔔 NOTIFICACIÓN: ${notification.title}`);
+      console.log(`📝 ${notification.message}`);
+      return;
+    }
 
     const notificationOptions = {
       title: notification.title,
