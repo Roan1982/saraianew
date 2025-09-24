@@ -1,0 +1,149 @@
+[
+  {
+    "timestamp": "2025-09-23T15:13:12.815Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 405.77,
+        "memory": 0
+      },
+      {
+        "name": "explorer.exe",
+        "cpu": 0.53,
+        "memory": 1.86
+      },
+      {
+        "name": "System",
+        "cpu": 0.32,
+        "memory": 0.06
+      },
+      {
+        "name": "ekrn.exe",
+        "cpu": 0.32,
+        "memory": 1.58
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.21,
+        "memory": 0.58
+      }
+    ],
+    "systemLoad": {
+      "cpu": 1.09,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T15:13:17.820Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 99.84,
+        "memory": 0
+      },
+      {
+        "name": "ekrn.exe",
+        "cpu": 0.13,
+        "memory": 1.58
+      }
+    ],
+    "systemLoad": {
+      "cpu": 0.47,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T15:13:22.834Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 96.49,
+        "memory": 0
+      },
+      {
+        "name": "ekrn.exe",
+        "cpu": 0.6,
+        "memory": 1.59
+      }
+    ],
+    "systemLoad": {
+      "cpu": 3.37,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T15:13:27.836Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 99.86,
+        "memory": 0
+      },
+      {
+        "name": "ekrn.exe",
+        "cpu": 0.44,
+        "memory": 1.59
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.14,
+        "memory": 0.57
+      }
+    ],
+    "systemLoad": {
+      "cpu": 5.78,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T15:13:32.836Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 102.03,
+        "memory": 0
+      }
+    ],
+    "systemLoad": {
+      "cpu": 1.85,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T15:13:37.837Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 99.87,
+        "memory": 0
+      },
+      {
+        "name": "ekrn.exe",
+        "cpu": 0.13,
+        "memory": 1.57
+      }
+    ],
+    "systemLoad": {
+      "cpu": 2.7,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  }
+]

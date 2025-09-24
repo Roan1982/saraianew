@@ -1,0 +1,219 @@
+[
+  {
+    "timestamp": "2025-09-23T12:23:41.846Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 101.37,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.56,
+        "memory": 3.96
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.5,
+        "memory": 3.41
+      },
+      {
+        "name": "dwm.exe",
+        "cpu": 0.25,
+        "memory": 0.93
+      },
+      {
+        "name": "ekrn.exe",
+        "cpu": 0.22,
+        "memory": 1.73
+      }
+    ],
+    "systemLoad": {
+      "cpu": 5.86,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:23:46.857Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 100.22,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.64,
+        "memory": 3.48
+      },
+      {
+        "name": "ekrn.exe",
+        "cpu": 0.19,
+        "memory": 1.73
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.14,
+        "memory": 1.06
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.14,
+        "memory": 3.99
+      }
+    ],
+    "systemLoad": {
+      "cpu": 6.88,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:23:51.865Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 94.41,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 3.88,
+        "memory": 1.01
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.08,
+        "memory": 3.38
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.18,
+        "memory": 4.04
+      },
+      {
+        "name": "System",
+        "cpu": 0.11,
+        "memory": 0.06
+      }
+    ],
+    "systemLoad": {
+      "cpu": 6.18,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:23:56.867Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 100.53,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.53,
+        "memory": 3.41
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.2,
+        "memory": 6.72
+      },
+      {
+        "name": "ekrn.exe",
+        "cpu": 0.17,
+        "memory": 1.72
+      }
+    ],
+    "systemLoad": {
+      "cpu": 6.47,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:24:01.882Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 98.47,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 2.25,
+        "memory": 3.48
+      },
+      {
+        "name": "audiodg.exe",
+        "cpu": 1.14,
+        "memory": 0.52
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.64,
+        "memory": 6.69
+      },
+      {
+        "name": "System",
+        "cpu": 0.39,
+        "memory": 0.06
+      }
+    ],
+    "systemLoad": {
+      "cpu": 7.47,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:24:06.882Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 88.86,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 4.56,
+        "memory": 1
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 3.02,
+        "memory": 3.61
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.94,
+        "memory": 6.52
+      },
+      {
+        "name": "ekrn.exe",
+        "cpu": 0.31,
+        "memory": 1.72
+      }
+    ],
+    "systemLoad": {
+      "cpu": 12.27,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  }
+]

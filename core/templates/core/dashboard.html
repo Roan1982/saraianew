@@ -1,0 +1,328 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - SARA{% endblock %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block breadcrumb %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard - {{ user.get_rol_display }}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Bienvenido al sistema SARA. Aquí puedes ver un resumen de tu actividad y acceder a las funciones principales.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-line"></i> Estadísticas Personales
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% if estadisticas %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="description-block border-right">
+                                    <span class="description-header">{{ estadisticas.puntaje }}</span>
+                                    <span class="description-text">PUNTAJE</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="description-block">
+                                    <span class="description-header">{{ estadisticas.mejoras }}</span>
+                                    <span class="description-text">MEJORAS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="fas fa-clock"></i> Última actualización: {{ estadisticas.fecha_actualizacion|date:"d/m/Y H:i" }}
+                            </small>
+                        </div>
+                    {% else %}
+                        <div class="text-center text-muted">
+                            <i class="fas fa-chart-line fa-2x mb-2"></i>
+                            <p>No hay estadísticas disponibles</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-brain"></i> Análisis de IA
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% if analisis %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="description-block border-right">
+                                    <span class="description-header">{{ analisis.patrones_detectados|length }}</span>
+                                    <span class="description-text">PATRONES</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="description-block">
+                                    <span class="description-header">{{ analisis.recomendacion|truncatechars:10 }}</span>
+                                    <span class="description-text">RECOMENDACIÓN</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="fas fa-clock"></i> Fecha análisis: {{ analisis.fecha_analisis|date:"d/m/Y H:i" }}
+                            </small>
+                        </div>
+                    {% else %}
+                        <div class="text-center text-muted">
+                            <i class="fas fa-brain fa-2x mb-2"></i>
+                            <p>No hay análisis disponible</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consejos del Agente IA -->
+    {% if consejos_recientes %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-robot"></i> Consejos de tu Agente Personal IA
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for consejo in consejos_recientes %}
+                        <div class="col-lg-4 mb-3">
+                            <div class="card h-100 border-left-primary">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-lightbulb text-warning fa-lg me-2"></i>
+                                        <small class="text-muted">{{ consejo.fecha_analisis|date:"d/m H:i" }}</small>
+                                    </div>
+                                    <p class="card-text small mb-2">{{ consejo.recomendacion|truncatechars:120 }}</p>
+                                    <a href="{% url 'analisis_detail' consejo.pk %}" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye"></i> Ver detalle
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Consejos Proactivos en Tiempo Real -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-bolt"></i> Asistente IA Proactivo
+                        <small class="float-right" id="last-update-time">Actualizando...</small>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div id="consejos-proactivos-container">
+                        <div class="text-center text-muted">
+                            <i class="fas fa-spinner fa-spin fa-2x mb-3"></i>
+                            <p>Analizando tu actividad actual...</p>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{% url 'asistente_chat' %}" class="btn btn-success btn-sm">
+                            <i class="fas fa-comments"></i> Conversar con el Asistente
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-area"></i> Gráfico de Rendimiento
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="performanceChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-bolt"></i> Acciones Rápidas
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <a href="{% url 'registro_create' %}" class="btn btn-primary btn-block mb-3">
+                                <i class="fas fa-plus"></i> Nuevo Registro
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <a href="{% url 'registros_list' %}" class="btn btn-secondary btn-block mb-3">
+                                <i class="fas fa-list"></i> Ver Registros
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <a href="{% url 'estadisticas_list' %}" class="btn btn-info btn-block mb-3">
+                                <i class="fas fa-chart-bar"></i> Ver Estadísticas
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <a href="{% url 'analisis_list' %}" class="btn btn-success btn-block mb-3">
+                                <i class="fas fa-brain"></i> Ver Análisis IA
+                            </a>
+                        </div>
+                    </div>
+                    {% if user.rol == 'admin' %}
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <a href="{% url 'usuario_create' %}" class="btn btn-warning btn-block mb-3">
+                                <i class="fas fa-user-plus"></i> Nuevo Usuario
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <a href="{% url 'usuarios_list' %}" class="btn btn-dark btn-block mb-3">
+                                <i class="fas fa-users"></i> Gestionar Usuarios
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <a href="{% url 'admin:index' %}" class="btn btn-outline-secondary btn-block mb-3">
+                                <i class="fas fa-cog"></i> Panel Admin
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Gráfico de rendimiento
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Puntaje',
+                data: [12, 19, 15, 25, 22, {{ estadisticas.puntaje|default:0 }}],
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Consejos proactivos en tiempo real
+    function actualizarConsejosProactivos() {
+        fetch('{% url "consejos_proactivos_api" %}', {
+            method: 'GET',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('consejos-proactivos-container');
+            const lastUpdate = document.getElementById('last-update-time');
+
+            // Actualizar timestamp
+            const now = new Date();
+            lastUpdate.textContent = now.toLocaleTimeString('es-ES', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            if (data.consejos) {
+                // Mostrar consejos con animación
+                const consejosArray = data.consejos.split(' | ');
+                let html = '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+                html += '<i class="fas fa-lightbulb"></i> <strong>¡Consejo del momento!</strong><br>';
+
+                consejosArray.forEach((consejo, index) => {
+                    html += `<span class="badge badge-success mr-1">${index + 1}</span>${consejo}<br>`;
+                });
+
+                html += '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+                html += '<span aria-hidden="true">&times;</span></button></div>';
+
+                container.innerHTML = html;
+
+                // Auto-ocultar después de 30 segundos
+                setTimeout(() => {
+                    const alert = container.querySelector('.alert');
+                    if (alert) {
+                        alert.classList.remove('show');
+                        setTimeout(() => {
+                            container.innerHTML = '<div class="text-center text-muted"><i class="fas fa-brain fa-2x mb-2"></i><p>Esperando próximos consejos...</p></div>';
+                        }, 150);
+                    }
+                }, 30000);
+
+            } else {
+                container.innerHTML = '<div class="text-center text-muted"><i class="fas fa-brain fa-2x mb-2"></i><p>No hay consejos disponibles en este momento</p></div>';
+            }
+        })
+        .catch(error => {
+            console.error('Error obteniendo consejos proactivos:', error);
+            const container = document.getElementById('consejos-proactivos-container');
+            container.innerHTML = '<div class="text-center text-muted"><i class="fas fa-exclamation-triangle fa-2x mb-2 text-warning"></i><p>Error al cargar consejos</p></div>';
+        });
+    }
+
+    // Actualizar consejos cada 2 minutos
+    actualizarConsejosProactivos(); // Primera carga inmediata
+    setInterval(actualizarConsejosProactivos, 120000); // Cada 2 minutos
+</script>
+{% endblock %}

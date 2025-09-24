@@ -1,0 +1,69 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Eliminar Registro - SARA{% endblock %}
+
+{% block page_title %}Confirmar Eliminación de Registro{% endblock %}
+
+{% block breadcrumb %}Eliminar Registro{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-exclamation-triangle"></i> Confirmar Eliminación
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="mb-4">¿Estás seguro de que quieres eliminar este registro?</p>
+
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Advertencia:</strong> Esta acción no se puede deshacer.
+                    </div>
+
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-info-circle"></i> Información del registro
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4">Fecha:</dt>
+                                <dd class="col-sm-8">{{ registro.fecha|date:"d/m/Y" }}</dd>
+
+                                <dt class="col-sm-4">Usuario:</dt>
+                                <dd class="col-sm-8">{{ registro.usuario.username }}</dd>
+
+                                <dt class="col-sm-4">Contenido:</dt>
+                                <dd class="col-sm-8"><code>{{ registro.contenido|truncatechars:100 }}</code></dd>
+
+                                {% if registro.errores %}
+                                <dt class="col-sm-4">Errores:</dt>
+                                <dd class="col-sm-8">{{ registro.errores|length }}</dd>
+                                {% endif %}
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'registros_list' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Cancelar
+                        </a>
+                        <form method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Sí, Eliminar Registro
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

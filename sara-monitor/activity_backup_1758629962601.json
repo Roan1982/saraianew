@@ -1,0 +1,214 @@
+[
+  {
+    "timestamp": "2025-09-23T12:18:56.037Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 98.33,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 0.99,
+        "memory": 1.03
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.18,
+        "memory": 1.96
+      },
+      {
+        "name": "dwm.exe",
+        "cpu": 0.1,
+        "memory": 0.93
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.1,
+        "memory": 0.58
+      }
+    ],
+    "systemLoad": {
+      "cpu": 2.33,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:19:01.053Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 94.23,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 2.49,
+        "memory": 5.59
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.36,
+        "memory": 3.69
+      },
+      {
+        "name": "python.exe",
+        "cpu": 0.94,
+        "memory": 1.03
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.34,
+        "memory": 1.04
+      }
+    ],
+    "systemLoad": {
+      "cpu": 6.81,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:19:06.057Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 95.71,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.5,
+        "memory": 3.59
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.11,
+        "memory": 1.03
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.05,
+        "memory": 5.79
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.21,
+        "memory": 1.04
+      }
+    ],
+    "systemLoad": {
+      "cpu": 5.31,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:19:11.059Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 98.27,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 0.87,
+        "memory": 1.03
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.42,
+        "memory": 3.58
+      },
+      {
+        "name": "svchost.exe",
+        "cpu": 0.13,
+        "memory": 0.17
+      },
+      {
+        "name": "dwm.exe",
+        "cpu": 0.1,
+        "memory": 0.83
+      }
+    ],
+    "systemLoad": {
+      "cpu": 2.52,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:19:16.060Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 96.35,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 2.32,
+        "memory": 3.22
+      },
+      {
+        "name": "python.exe",
+        "cpu": 0.89,
+        "memory": 1.03
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.18,
+        "memory": 0.93
+      }
+    ],
+    "systemLoad": {
+      "cpu": 4.01,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:19:21.065Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 98.22,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.07,
+        "memory": 1.03
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.37,
+        "memory": 3.21
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.16,
+        "memory": 0.93
+      }
+    ],
+    "systemLoad": {
+      "cpu": 2.21,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  }
+]

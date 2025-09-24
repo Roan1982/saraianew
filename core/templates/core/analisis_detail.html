@@ -1,0 +1,244 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Análisis IA de {{ analisis.usuario.get_full_name|default:analisis.usuario.username }} - SARA{% endblock %}
+
+{% block page_title %}Análisis IA de {{ analisis.usuario.get_full_name|default:analisis.usuario.username }}{% endblock %}
+
+{% block breadcrumb %}Detalle Análisis IA{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-user-friends"></i> Consejos de tu Agente Personal IA
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% if analisis.patrones_detectados.tipo == "agente_personal" %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>¡Consejos personalizados basados en tu actividad actual!</strong>
+                    </div>
+                    {% endif %}
+
+                    <div class="consejos-container">
+                        {% with consejos=analisis.recomendacion|truncatechars:500 %}
+                        <div class="consejo-item mb-3 p-3 bg-light rounded">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-lightbulb text-warning fa-lg mt-1"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="mb-0">{{ consejos|linebreaks }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endwith %}
+                    </div>
+
+                    <div class="mt-4">
+                        <small class="text-muted">
+                            <i class="fas fa-clock"></i>
+                            Consejos generados el {{ analisis.fecha_analisis|date:"d/m/Y" }} a las {{ analisis.fecha_analisis|date:"H:i" }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-info-circle"></i> Información General
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-5">Usuario:</dt>
+                        <dd class="col-sm-7">{{ analisis.usuario.username }}</dd>
+
+                        <dt class="col-sm-5">Nombre:</dt>
+                        <dd class="col-sm-7">{{ analisis.usuario.get_full_name|default:"-" }}</dd>
+
+                        <dt class="col-sm-5">Rol:</dt>
+                        <dd class="col-sm-7">{{ analisis.usuario.get_rol_display }}</dd>
+
+                        <dt class="col-sm-5">Patrones:</dt>
+                        <dd class="col-sm-7">{{ analisis.patrones_detectados|length }}</dd>
+
+                        <dt class="col-sm-5">Fecha:</dt>
+                        <dd class="col-sm-7">{{ analisis.fecha_analisis|date:"d/m/Y H:i" }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-search"></i> Análisis Detallado
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% if analisis.patrones_detectados %}
+                        {% if analisis.patrones_detectados.tipo == "agente_personal" %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="info-box bg-light">
+                                    <span class="info-box-icon bg-primary"><i class="fas fa-desktop"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Aplicación Activa</span>
+                                        <span class="info-box-number">{{ analisis.patrones_detectados.ventana_activa|default:"No detectada" }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box bg-light">
+                                    <span class="info-box-icon bg-success"><i class="fas fa-brain"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Tipo de Análisis</span>
+                                        <span class="info-box-number">Agente Personal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>{{ analisis.patrones_detectados.consejos_contextuales|default:0 }}</h3>
+                                        <p>Consejos Contextuales</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="small-box bg-warning">
+                                    <div class="inner">
+                                        <h3>{{ analisis.patrones_detectados.consejos_productividad|default:0 }}</h3>
+                                        <p>Consejos de Productividad</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="small-box bg-danger">
+                                    <div class="inner">
+                                        <h3>{{ analisis.patrones_detectados.consejos_tiempo|default:0 }}</h3>
+                                        <p>Consejos de Tiempo</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="row">
+                            {% for key, value in analisis.patrones_detectados.items %}
+                            <div class="col-lg-3 col-md-4 mb-3">
+                                <div class="card h-100 border-primary">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-title text-primary">{{ key|title }}</h6>
+                                        <p class="card-text">{{ value }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>No se detectaron patrones específicos</strong>
+                        <p class="mb-0">El usuario mantiene un comportamiento consistente y sin patrones de error identificables.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-bar"></i> Estadísticas Relacionadas
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% with estadistica=analisis.usuario.estadistica_set.last %}
+                    {% if estadistica %}
+                    <div class="row text-center">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>{{ estadistica.puntaje }}</h3>
+                                    <p>Puntaje Actual</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>{{ estadistica.mejoras }}</h3>
+                                    <p>Mejoras</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>{{ analisis.usuario.registro_set.count }}</h3>
+                                    <p>Registros</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>{{ registros_con_errores }}</h3>
+                                    <p>Con Errores</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        No hay estadísticas disponibles para este usuario.
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

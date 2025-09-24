@@ -1,0 +1,302 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard Administrativo - SARA{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Encabezado -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard Administrativo
+                    </h3>
+                    <div class="card-tools">
+                        <span class="badge badge-info">Rol: {{ user.get_rol_display }}</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">
+                        Bienvenido al panel de control administrativo. Aquí puedes monitorear la actividad
+                        y productividad de todos los empleados en tiempo real.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas generales -->
+    <div class="row mb-4">
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ total_usuarios }}</h3>
+                    <p>Total de Usuarios</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                {% if user.rol == 'admin' %}
+                <a href="{% url 'usuarios_list' %}" class="small-box-footer">
+                    Ver Usuarios <i class="fas fa-arrow-circle-right"></i>
+                </a>
+                {% else %}
+                <div class="small-box-footer">&nbsp;</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{ usuarios_activos }}</h3>
+                    <p>Usuarios Activos</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="small-box-footer">&nbsp;</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{ estadisticas_24h.total }}</h3>
+                    <p>Actividades (24h)</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <a href="{% url 'actividad_list' %}" class="small-box-footer">
+                    Ver Actividad <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>{{ alertas_recientes|length }}</h3>
+                    <p>Alertas Recientes</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="small-box-footer">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico de productividad -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-chart-pie"></i> Productividad General (24 horas)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="productividadChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-clock"></i> Resumen de Hoy
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <h4>{{ estadisticas_24h.productiva }}</h4>
+                        <p class="text-success">Actividades Productivas</p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <h4>{{ estadisticas_24h.improductiva }}</h4>
+                        <p class="text-danger">Actividades Improductivas</p>
+                    </div>
+                    <div class="text-center mb-3">
+                        <h4>{{ estadisticas_24h.gaming }}</h4>
+                        <p class="text-warning">Tiempo en Juegos</p>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <h5>{{ estadisticas_24h.total }}</h5>
+                        <p class="text-muted">Total de Actividades</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Usuarios más activos -->
+    <div class="row mb-4">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-user-clock"></i> Usuarios Más Activos (24h)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Actividades</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for usuario in usuarios_mas_activos %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ usuario.usuario__first_name }} {{ usuario.usuario__last_name }}</strong>
+                                        <br><small class="text-muted">{{ usuario.usuario__username }}</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-primary">{{ usuario.count }}</span>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'actividad_usuario_detail' usuario.usuario__id %}"
+                                           class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i> Ver Detalle
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted">
+                                        No hay actividad reciente
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alertas recientes -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-exclamation-triangle"></i> Alertas IA Recientes
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        {% for alerta in alertas_recientes %}
+                        <div class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">
+                                    <a href="{% url 'actividad_usuario_detail' alerta.usuario.id %}">
+                                        {{ alerta.usuario.get_full_name }}
+                                    </a>
+                                </h6>
+                                <small>{{ alerta.fecha_analisis|date:"d/m H:i" }}</small>
+                            </div>
+                            <p class="mb-1">{{ alerta.recomendacion|truncatechars:100 }}</p>
+                            <small>
+                                <a href="{% url 'analisis_detail' alerta.id %}" class="text-primary">
+                                    Ver análisis completo
+                                </a>
+                            </small>
+                        </div>
+                        {% empty %}
+                        <div class="list-group-item text-center text-muted">
+                            No hay alertas recientes
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enlaces rápidos -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-link"></i> Accesos Rápidos
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-{% if user.rol == 'admin' %}3{% else %}4{% endif %}">
+                            <a href="{% url 'actividad_list' %}" class="btn btn-primary btn-block">
+                                <i class="fas fa-eye"></i> Ver Toda la Actividad
+                            </a>
+                        </div>
+                        {% if user.rol == 'admin' %}
+                        <div class="col-md-3">
+                            <a href="{% url 'usuarios_list' %}" class="btn btn-success btn-block">
+                                <i class="fas fa-users"></i> Gestionar Usuarios
+                            </a>
+                        </div>
+                        {% endif %}
+                        <div class="col-md-{% if user.rol == 'admin' %}3{% else %}4{% endif %}">
+                            <a href="{% url 'estadisticas_list' %}" class="btn btn-warning btn-block">
+                                <i class="fas fa-chart-bar"></i> Ver Estadísticas
+                            </a>
+                        </div>
+                        <div class="col-md-{% if user.rol == 'admin' %}3{% else %}4{% endif %}">
+                            <a href="{% url 'analisis_list' %}" class="btn btn-danger btn-block">
+                                <i class="fas fa-brain"></i> Ver Análisis IA
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Gráfico de productividad
+    const ctx = document.getElementById('productividadChart').getContext('2d');
+    const productividadChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Productiva', 'Improductiva', 'Juegos'],
+            datasets: [{
+                data: [
+                    {{ estadisticas_24h.productiva }},
+                    {{ estadisticas_24h.improductiva }},
+                    {{ estadisticas_24h.gaming }}
+                ],
+                backgroundColor: [
+                    '#28a745', // verde
+                    '#dc3545', // rojo
+                    '#ffc107'  // amarillo
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

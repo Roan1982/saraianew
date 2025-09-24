@@ -1,0 +1,273 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Vista Completa de Empleados - SARA{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Vista Completa de Empleados</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'dashboard_admin' %}">Dashboard Admin</a></li>
+{% block breadcrumb %}Vista Empleados{% endblock %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Estadísticas generales -->
+            <div class="row mb-4">
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ empleados_data|length }}</h3>
+                            <p>Total Empleados</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ empleados_data|length }}</h3>
+                            <p>Empleados Activos</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{% for emp in empleados_data %}{% if emp.estado == 'activo' %}{{ forloop.counter }}{% endif %}{% endfor %}</h3>
+                            <p>Activos Ahora</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{% for emp in empleados_data %}{% if emp.analisis_reciente %}{% if 'baja' in emp.analisis_reciente.recomendacion|lower or 'improductiv' in emp.analisis_reciente.recomendacion|lower %}{{ forloop.counter }}{% endif %}{% endif %}{% endfor %}</h3>
+                            <p>Con Alertas</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de empleados -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Detalle de Todos los Empleados</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Empleado</th>
+                                <th>Estado</th>
+                                <th>Productividad (24h)</th>
+                                <th>Actividad Reciente</th>
+                                <th>Análisis IA</th>
+                                <th>Estadísticas</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for emp_data in empleados_data %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="text-center mr-3">
+                                            {% if emp_data.usuario.photo %}
+                                                <img src="{{ emp_data.usuario.photo.url }}" class="img-circle elevation-2" alt="Foto" style="width: 40px; height: 40px;">
+                                            {% else %}
+                                                <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                                    <i class="fas fa-user text-white"></i>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div>
+                                            <strong>{{ emp_data.usuario.get_full_name|default:emp_data.usuario.username }}</strong><br>
+                                            <small class="text-muted">{{ emp_data.usuario.email }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if emp_data.estado == 'activo' %}
+                                        <span class="badge badge-success">Activo</span>
+                                    {% elif emp_data.estado == 'inactivo_hoy' %}
+                                        <span class="badge badge-warning">Inactivo Hoy</span>
+                                    {% else %}
+                                        <span class="badge badge-secondary">Sin Actividad</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if emp_data.estadisticas_24h.total > 0 %}
+                                        <div class="progress-group">
+                                            <div class="progress progress-sm">
+                                                <div class="progress-bar bg-{% if emp_data.estadisticas_24h.productividad_porcentaje >= 70 %}success{% elif emp_data.estadisticas_24h.productividad_porcentaje >= 40 %}warning{% else %}danger{% endif %}"
+                                                     style="width: {{ emp_data.estadisticas_24h.productividad_porcentaje }}%"></div>
+                                            </div>
+                                            <span class="float-right"><b>{{ emp_data.estadisticas_24h.productiva }}</b>/{{ emp_data.estadisticas_24h.total }}</span>
+                                        </div>
+                                        <small class="text-muted">{{ emp_data.estadisticas_24h.productividad_porcentaje }}% Productivo</small>
+                                    {% else %}
+                                        <span class="text-muted">Sin datos</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if emp_data.ultima_actividad %}
+                                        <small>
+                                            <strong>{{ emp_data.ultima_actividad.ventana_activa|truncatechars:25 }}</strong><br>
+                                            {{ emp_data.ultima_actividad.timestamp|date:"H:i" }}<br>
+                                            <span class="badge badge-{% if emp_data.ultima_actividad.productividad == 'productive' %}success{% elif emp_data.ultima_actividad.productividad == 'unproductive' %}danger{% elif emp_data.ultima_actividad.productividad == 'gaming' %}warning{% else %}secondary{% endif %}">
+                                                {{ emp_data.ultima_actividad.productividad|title }}
+                                            </span>
+                                        </small>
+                                    {% else %}
+                                        <span class="text-muted">Sin actividad</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if emp_data.analisis_reciente %}
+                                        <small>
+                                            <strong>{{ emp_data.analisis_reciente.fecha_analisis|date:"d/m H:i" }}</strong><br>
+                                            <span class="text-truncate d-inline-block" style="max-width: 200px;" title="{{ emp_data.analisis_reciente.recomendacion }}">
+                                                {{ emp_data.analisis_reciente.recomendacion|truncatechars:50 }}
+                                            </span>
+                                        </small>
+                                    {% else %}
+                                        <span class="text-muted">Sin análisis</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if emp_data.estadistica %}
+                                        <small>
+                                            Puntaje: <strong>{{ emp_data.estadistica.puntaje }}</strong><br>
+                                            Tareas: {{ emp_data.estadistica.tareas_completadas }}/{{ emp_data.estadistica.tareas_totales }}<br>
+                                            Eficiencia: {{ emp_data.estadistica.eficiencia }}%
+                                        </small>
+                                    {% else %}
+                                        <span class="text-muted">Sin estadísticas</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{% url 'actividad_usuario_detail' emp_data.usuario.id %}" class="btn btn-sm btn-info" title="Ver actividad detallada">
+                                            <i class="fas fa-chart-line"></i>
+                                        </a>
+                                        <a href="{% url 'analisis_detail' emp_data.analisis_reciente.id %}" class="btn btn-sm btn-warning" title="Ver análisis IA" {% if not emp_data.analisis_reciente %}disabled{% endif %}>
+                                            <i class="fas fa-brain"></i>
+                                        </a>
+                                        <a href="{% url 'estadistica_detail' emp_data.estadistica.id %}" class="btn btn-sm btn-success" title="Ver estadísticas" {% if not emp_data.estadistica %}disabled{% endif %}>
+                                            <i class="fas fa-chart-bar"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Gráfico de productividad general -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Resumen de Productividad General (24h)</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="productivityChart" style="height: 300px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
+<script>
+$(document).ready(function() {
+    // Datos para el gráfico de productividad
+    var ctx = document.getElementById('productivityChart').getContext('2d');
+    var productivityData = {
+        labels: [
+            {% for emp_data in empleados_data %}
+                '{{ emp_data.usuario.get_full_name|default:emp_data.usuario.username|truncatechars:15 }}',
+            {% endfor %}
+        ],
+        datasets: [{
+            label: 'Productividad (%)',
+            data: [
+                {% for emp_data in empleados_data %}
+                    {{ emp_data.estadisticas_24h.productividad_porcentaje }},
+                {% endfor %}
+            ],
+            backgroundColor: [
+                {% for emp_data in empleados_data %}
+                    {% if emp_data.estadisticas_24h.productividad_porcentaje >= 70 %}'rgba(40, 167, 69, 0.8)'{% elif emp_data.estadisticas_24h.productividad_porcentaje >= 40 %}'rgba(255, 193, 7, 0.8)'{% else %}'rgba(220, 53, 69, 0.8)'{% endif %},
+                {% endfor %}
+            ],
+            borderColor: [
+                {% for emp_data in empleados_data %}
+                    {% if emp_data.estadisticas_24h.productividad_porcentaje >= 70 %}'rgba(40, 167, 69, 1)'{% elif emp_data.estadisticas_24h.productividad_porcentaje >= 40 %}'rgba(255, 193, 7, 1)'{% else %}'rgba(220, 53, 69, 1)'{% endif %},
+                {% endfor %}
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    var productivityChart = new Chart(ctx, {
+        type: 'bar',
+        data: productivityData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

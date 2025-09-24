@@ -1,0 +1,219 @@
+[
+  {
+    "timestamp": "2025-09-23T14:51:11.188Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 95.26,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.59,
+        "memory": 6.08
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.09,
+        "memory": 1.05
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.86,
+        "memory": 1.65
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.7,
+        "memory": 1.56
+      }
+    ],
+    "systemLoad": {
+      "cpu": 4.32,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T14:51:16.195Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 96.34,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.12,
+        "memory": 1.5
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.02,
+        "memory": 1.05
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.6,
+        "memory": 1.53
+      },
+      {
+        "name": "dwm.exe",
+        "cpu": 0.31,
+        "memory": 0.83
+      }
+    ],
+    "systemLoad": {
+      "cpu": 4.92,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T14:51:21.197Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 95.78,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.25,
+        "memory": 4.2
+      },
+      {
+        "name": "python.exe",
+        "cpu": 0.96,
+        "memory": 1.05
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.63,
+        "memory": 1.52
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.39,
+        "memory": 1.63
+      }
+    ],
+    "systemLoad": {
+      "cpu": 4.72,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T14:51:26.205Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 95.14,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.38,
+        "memory": 1.52
+      },
+      {
+        "name": "System",
+        "cpu": 1.05,
+        "memory": 0.06
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.02,
+        "memory": 1.05
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.55,
+        "memory": 6.23
+      }
+    ],
+    "systemLoad": {
+      "cpu": 5.23,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T14:51:31.206Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 96.56,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.13,
+        "memory": 1.05
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.1,
+        "memory": 1.5
+      },
+      {
+        "name": "dwm.exe",
+        "cpu": 1.03,
+        "memory": 0.83
+      }
+    ],
+    "systemLoad": {
+      "cpu": 4.38,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T14:51:36.206Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 177.63,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 2.86,
+        "memory": 6.31
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.74,
+        "memory": 1.43
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.26,
+        "memory": 4.41
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.97,
+        "memory": 4.34
+      }
+    ],
+    "systemLoad": {
+      "cpu": 4.89,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  }
+]

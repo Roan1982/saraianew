@@ -1,0 +1,224 @@
+[
+  {
+    "timestamp": "2025-09-23T12:25:42.013Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 95.14,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 2.18,
+        "memory": 1.01
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 1.56,
+        "memory": 1.45
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.29,
+        "memory": 1.95
+      },
+      {
+        "name": "dwm.exe",
+        "cpu": 0.18,
+        "memory": 0.91
+      }
+    ],
+    "systemLoad": {
+      "cpu": 5.14,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:25:47.016Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 95.78,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 2.03,
+        "memory": 1.02
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 1.08,
+        "memory": 1.44
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.37,
+        "memory": 0.53
+      },
+      {
+        "name": "dwm.exe",
+        "cpu": 0.34,
+        "memory": 0.87
+      }
+    ],
+    "systemLoad": {
+      "cpu": 5.1,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:25:52.020Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 97.07,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.05,
+        "memory": 1.02
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.45,
+        "memory": 0.5
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.31,
+        "memory": 0.53
+      },
+      {
+        "name": "dwm.exe",
+        "cpu": 0.21,
+        "memory": 0.87
+      }
+    ],
+    "systemLoad": {
+      "cpu": 3.54,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:25:57.033Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 97.03,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 0.91,
+        "memory": 1.02
+      },
+      {
+        "name": "System",
+        "cpu": 0.49,
+        "memory": 0.06
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.47,
+        "memory": 0.51
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.34,
+        "memory": 0.96
+      }
+    ],
+    "systemLoad": {
+      "cpu": 3.58,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:26:02.034Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 96.85,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 0.89,
+        "memory": 1.02
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.84,
+        "memory": 3.44
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.74,
+        "memory": 0.51
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.26,
+        "memory": 0.58
+      }
+    ],
+    "systemLoad": {
+      "cpu": 3.77,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T12:26:07.048Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 97.6,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.1,
+        "memory": 1.02
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.29,
+        "memory": 0.51
+      },
+      {
+        "name": "dwm.exe",
+        "cpu": 0.24,
+        "memory": 0.87
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.24,
+        "memory": 3.38
+      }
+    ],
+    "systemLoad": {
+      "cpu": 2.91,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  }
+]

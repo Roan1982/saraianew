@@ -1,0 +1,198 @@
+[
+  {
+    "timestamp": "2025-09-23T15:01:11.860Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 95.16,
+        "memory": 0
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 1.2,
+        "memory": 2.14
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 1.04,
+        "memory": 3.58
+      },
+      {
+        "name": "python.exe",
+        "cpu": 0.99,
+        "memory": 1.05
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.73,
+        "memory": 4.26
+      }
+    ],
+    "systemLoad": {
+      "cpu": 5.18,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T15:01:16.863Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 95.34,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 2.4,
+        "memory": 4.28
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1,
+        "memory": 1.05
+      },
+      {
+        "name": "System",
+        "cpu": 0.37,
+        "memory": 0.06
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.37,
+        "memory": 6.6
+      }
+    ],
+    "systemLoad": {
+      "cpu": 5.32,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T15:01:21.867Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 94.04,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 2.1,
+        "memory": 4.34
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.18,
+        "memory": 6.35
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.02,
+        "memory": 1.05
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.79,
+        "memory": 2.09
+      }
+    ],
+    "systemLoad": {
+      "cpu": 6.87,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T15:01:26.873Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 96.11,
+        "memory": 0
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.25,
+        "memory": 1.05
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.6,
+        "memory": 2.2
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.52,
+        "memory": 4.29
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.26,
+        "memory": 2.87
+      }
+    ],
+    "systemLoad": {
+      "cpu": 4.06,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T15:01:31.888Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 93.86,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.97,
+        "memory": 4.26
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 1.32,
+        "memory": 2.87
+      },
+      {
+        "name": "python.exe",
+        "cpu": 1.06,
+        "memory": 1.05
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.23,
+        "memory": 6.54
+      }
+    ],
+    "systemLoad": {
+      "cpu": 6.59,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T15:01:36.889Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "Sistema",
+    "topProcesses": [],
+    "systemLoad": {
+      "cpu": 12.56,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  }
+]

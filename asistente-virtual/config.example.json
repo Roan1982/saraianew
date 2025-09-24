@@ -1,0 +1,42 @@
+{
+  "theme": "light",
+  "opacity": 0.9,
+  "showNotifications": true,
+  "proactiveAdvice": true,
+  "autoStart": false,
+  "minimizeToTray": true,
+  "position": {
+    "x": 50,
+    "y": 50
+  },
+  "hotkeys": {
+    "toggleVisibility": "Ctrl+Shift+S",
+    "quickChat": "Ctrl+Shift+C"
+  },
+  "api": {
+    "baseUrl": "https://api.sara-ai.com",
+    "timeout": 10000,
+    "retryAttempts": 3
+  },
+  "monitoring": {
+    "enabled": true,
+    "apps": [
+      "chrome",
+      "vscode",
+      "word",
+      "excel",
+      "powerpoint"
+    ],
+    "idleThreshold": 300000,
+    "adviceInterval": 60000
+  },
+  "notifications": {
+    "soundEnabled": true,
+    "showOnLockScreen": false,
+    "priority": "normal"
+  },
+  "privacy": {
+    "collectUsageStats": false,
+    "shareContextData": false
+  }
+}

@@ -1,0 +1,102 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{% if action == 'create' %}Crear{% else %}Editar{% endif %} Usuario - SARA{% endblock %}
+
+{% block page_title %}{% if action == 'create' %}Crear Nuevo Usuario{% else %}Editar Usuario{% endif %}{% endblock %}
+
+{% block breadcrumb %}{% if action == 'create' %}Crear{% else %}Editar{% endif %} Usuario{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-{% if action == 'create' %}plus{% else %}edit{% endif %}"></i>
+                        {% if action == 'create' %}Crear Nuevo Usuario{% else %}Editar Usuario{% endif %}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Nombre de Usuario *</label>
+                            <input type="text" name="username" id="id_username" class="form-control"
+                                   value="{% if usuario %}{{ usuario.username }}{% endif %}"
+                                   {% if action == 'edit' %}readonly{% endif %} required>
+                            {% if action == 'edit' %}
+                            <div class="form-text">El nombre de usuario no se puede cambiar.</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Email</label>
+                            <input type="email" name="email" id="id_email" class="form-control"
+                                   value="{% if usuario %}{{ usuario.email }}{% endif %}">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="id_first_name" class="form-label">Nombre</label>
+                                    <input type="text" name="first_name" id="id_first_name" class="form-control"
+                                           value="{% if usuario %}{{ usuario.first_name }}{% endif %}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="id_last_name" class="form-label">Apellido</label>
+                                    <input type="text" name="last_name" id="id_last_name" class="form-control"
+                                           value="{% if usuario %}{{ usuario.last_name }}{% endif %}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_rol" class="form-label">Rol *</label>
+                            <select name="rol" id="id_rol" class="form-select" required>
+                                <option value="">Seleccionar rol...</option>
+                                <option value="admin" {% if usuario and usuario.rol == 'admin' %}selected{% endif %}>Administrador</option>
+                                <option value="supervisor" {% if usuario and usuario.rol == 'supervisor' %}selected{% endif %}>Supervisor</option>
+                                <option value="empleado" {% if usuario and usuario.rol == 'empleado' %}selected{% endif %}>Empleado</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label">
+                                {% if action == 'create' %}Contraseña *{% else %}Nueva Contraseña (dejar vacío para mantener actual){% endif %}
+                            </label>
+                            <input type="password" name="password" id="id_password" class="form-control"
+                                   {% if action == 'create' %}required{% endif %}>
+                            {% if action == 'edit' %}
+                            <div class="form-text">Dejar vacío para mantener la contraseña actual.</div>
+                            {% endif %}
+                        </div>
+
+                        {% if action == 'edit' %}
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" name="is_active" id="id_is_active" class="form-check-input"
+                                   {% if usuario and usuario.is_active %}checked{% endif %}>
+                            <label for="id_is_active" class="form-check-label">Usuario activo</label>
+                        </div>
+                        {% endif %}
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'usuarios_list' %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                {% if action == 'create' %}Crear Usuario{% else %}Guardar Cambios{% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{
+  "name": "sara-monitor",
+  "version": "1.0.0",
+  "description": "SARA Activity Monitor - Sistema de monitoreo proactivo de productividad",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "dist": "electron-builder --publish=never"
+  },
+  "keywords": [
+    "productivity",
+    "monitoring",
+    "ai",
+    "electron"
+  ],
+  "author": "SARA System",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^25.9.8",
+    "electron-builder": "^24.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "moment": "^2.29.4",
+    "node-machine-id": "^1.1.12",
+    "systeminformation": "^5.18.0"
+  },
+  "build": {
+    "appId": "com.sara.monitor",
+    "productName": "SARA Monitor",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/**/*",
+      "!build/**/*",
+      "!*.md"
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  }
+}

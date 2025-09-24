@@ -1,0 +1,69 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{% if action == 'create' %}Crear{% else %}Editar{% endif %} Registro - SARA{% endblock %}
+
+{% block page_title %}{% if action == 'create' %}Crear Nuevo Registro{% else %}Editar Registro{% endif %}{% endblock %}
+
+{% block breadcrumb %}{% if action == 'create' %}Crear{% else %}Editar{% endif %} Registro{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-{% if action == 'create' %}plus{% else %}edit{% endif %}"></i>
+                        {% if action == 'create' %}Crear Nuevo Registro{% else %}Editar Registro{% endif %}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="id_fecha" class="form-label">Fecha *</label>
+                            <input type="date" name="fecha" id="id_fecha" class="form-control"
+                                   value="{% if registro %}{{ registro.fecha|date:'Y-m-d' }}{% else %}{{ 'now'|date:'Y-m-d' }}{% endif %}" required>
+                            <div class="form-text">Formato: DD/MM/AAAA</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_contenido" class="form-label">Contenido (JSON) *</label>
+                            <textarea name="contenido" id="id_contenido" class="form-control" rows="8" required
+                                      placeholder='Ejemplo: {"campo1": "valor1", "campo2": "valor2"}'>{% if registro %}{{ registro.contenido|safe }}{% endif %}</textarea>
+                            <div class="form-text">
+                                Ingrese los datos en formato JSON válido. Ejemplo: {"nombre": "Juan", "fecha": "15/08/2024"}
+                            </div>
+                        </div>
+
+                        {% if registro and registro.errores %}
+                        <div class="mb-3">
+                            <div class="alert alert-warning">
+                                <h6><i class="fas fa-exclamation-triangle"></i> Errores detectados:</h6>
+                                <ul class="mb-0">
+                                    {% for error in registro.errores %}
+                                    <li><strong>{{ error.campo }}:</strong> {{ error.mensaje }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'registros_list' %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                {% if action == 'create' %}Crear Registro{% else %}Guardar Cambios{% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

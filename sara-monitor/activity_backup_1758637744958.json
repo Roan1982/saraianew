@@ -1,0 +1,204 @@
+[
+  {
+    "timestamp": "2025-09-23T14:28:38.438Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 96.85,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.59,
+        "memory": 3.32
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 1.09,
+        "memory": 2.88
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.1,
+        "memory": 0.59
+      }
+    ],
+    "systemLoad": {
+      "cpu": 3.48,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T14:28:43.442Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 99.32,
+        "memory": 0
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.31,
+        "memory": 2.92
+      }
+    ],
+    "systemLoad": {
+      "cpu": 0.89,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T14:28:48.457Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 98.03,
+        "memory": 0
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 1.09,
+        "memory": 3.5
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.13,
+        "memory": 1.44
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.13,
+        "memory": 1.61
+      },
+      {
+        "name": "System",
+        "cpu": 0.1,
+        "memory": 0.06
+      }
+    ],
+    "systemLoad": {
+      "cpu": 2.57,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T14:28:53.460Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 99.57,
+        "memory": 0
+      },
+      {
+        "name": "ekrn.exe",
+        "cpu": 0.19,
+        "memory": 1.61
+      },
+      {
+        "name": "brave.exe",
+        "cpu": 0.19,
+        "memory": 2.94
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.16,
+        "memory": 1.48
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.16,
+        "memory": 3.52
+      }
+    ],
+    "systemLoad": {
+      "cpu": 1.64,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T14:28:58.471Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 99.89,
+        "memory": 0
+      },
+      {
+        "name": "System",
+        "cpu": 0.69,
+        "memory": 0.06
+      },
+      {
+        "name": "svchost.exe",
+        "cpu": 0.26,
+        "memory": 0.25
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.13,
+        "memory": 3.51
+      },
+      {
+        "name": "audiodg.exe",
+        "cpu": 0.13,
+        "memory": 0.44
+      }
+    ],
+    "systemLoad": {
+      "cpu": 1.93,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  },
+  {
+    "timestamp": "2025-09-23T14:29:03.484Z",
+    "machineId": "e87457178d3da5b8e43470dc31abb64a440997adc8d1084b35502216191a8ad8",
+    "activeWindow": "System Idle Process",
+    "topProcesses": [
+      {
+        "name": "System Idle Process",
+        "cpu": 92.64,
+        "memory": 0
+      },
+      {
+        "name": "svchost.exe",
+        "cpu": 3.24,
+        "memory": 0.18
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 2.85,
+        "memory": 3.46
+      },
+      {
+        "name": "electron.exe",
+        "cpu": 0.31,
+        "memory": 0.59
+      },
+      {
+        "name": "Code.exe",
+        "cpu": 0.21,
+        "memory": 1.06
+      }
+    ],
+    "systemLoad": {
+      "cpu": 7.91,
+      "cpus": 12
+    },
+    "productivity": "neutral"
+  }
+]

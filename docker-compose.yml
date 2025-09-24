@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./db.sqlite3:/app/db.sqlite3
+      - ./staticfiles:/app/staticfiles
+    environment:
+      - DJANGO_SETTINGS_MODULE=sara.settings
+      - DEBUG=True
+      - PYTHONUNBUFFERED=1
+    networks:
+      - sara-network
+    command: >
+      sh -c "
+        python manage.py migrate --noinput &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  electron:
+    build:
+      context: .
+      dockerfile: Dockerfile.electron
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - ./asistente-virtual:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      - DISPLAY=:99
+      - API_URL=http://backend:8000/api
+      - ELECTRON_DISABLE_SECURITY_WARNINGS=true
+      - NODE_ENV=production
+    networks:
+      - sara-network
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    # Para desarrollo, puedes descomentar estas líneas si necesitas acceso directo
+    # ports:
+    #   - "9222:9222"  # Para debugging de Electron
+    # command: npm run dev
+    # NOTA: La GUI de Electron solo funciona en Linux con X11
+    # En Windows/Mac, usa la aplicación nativa fuera de Docker
+
+networks:
+  sara-network:
+    driver: bridge
+
+volumes:
+  db-data:

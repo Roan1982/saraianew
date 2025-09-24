@@ -1,0 +1,132 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Estadísticas - SARA{% endblock %}
+
+{% block page_title %}Estadísticas de Rendimiento{% endblock %}
+
+{% block breadcrumb %}Estadísticas{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-bar"></i> Lista de Estadísticas
+                    </h3>
+                    <div class="card-tools">
+                        <button onclick="location.reload()" class="btn btn-primary btn-sm">
+                            <i class="fas fa-sync"></i> Actualizar
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Puntaje</th>
+                                    <th>Mejoras</th>
+                                    <th>Última Actualización</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for estadistica in estadisticas %}
+                                <tr>
+                                    <td>{{ estadistica.usuario.username }}</td>
+                                    <td>
+                                        <span class="badge bg-{% if estadistica.puntaje >= 80 %}success{% elif estadistica.puntaje >= 60 %}warning{% else %}danger{% endif %}">
+                                            {{ estadistica.puntaje }}
+                                        </span>
+                                    </td>
+                                    <td>{{ estadistica.mejoras }}</td>
+                                    <td>{{ estadistica.fecha_actualizacion|date:"d/m/Y H:i" }}</td>
+                                    <td>
+                                        <a href="{% url 'estadistica_detail' estadistica.pk %}" class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i> Ver Detalles
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">
+                                        <i class="fas fa-chart-line"></i> No hay estadísticas disponibles
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resumen General -->
+    {% if user.rol == 'admin' or user.rol == 'supervisor' %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-pie"></i> Resumen General
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>{{ estadisticas|length }}</h3>
+                                    <p>Usuarios con estadísticas</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>{% widthratio estadisticas|length 1 1 %}</h3>
+                                    <p>Total de mejoras</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>85</h3>
+                                    <p>Puntaje promedio</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>95%</h3>
+                                    <p>Precisión IA</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
