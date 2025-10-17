@@ -60,6 +60,7 @@ urlpatterns = [
     path('api/login/', views.login_api, name='login_api'),
     path('api/asistente/chat/', views.asistente_chat_api, name='asistente_chat_api'),
     path('api/consejos-proactivos/', views.consejos_proactivos_api, name='consejos_proactivos_api'),
+    path('api/activity/', views.activity_api, name='activity_api'),
 
     path('api/', include(router.urls)),
     path('api/dashboard/', views.dashboard_api, name='dashboard'),

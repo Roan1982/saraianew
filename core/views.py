@@ -742,6 +742,34 @@ def consejos_proactivos_api(request):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def activity_api(request):
+    """API para registrar actividad del usuario"""
+    try:
+        user = request.user
+        data = request.data
+
+        # Crear registro de actividad
+        actividad = ActividadUsuario.objects.create(
+            usuario=user,
+            machine_id=data.get('machine_id', 'unknown'),
+            timestamp=timezone.now(),
+            ventana_activa=data.get('ventana_activa', ''),
+            procesos_activos=data.get('procesos_activos', []),
+            carga_sistema=data.get('carga_sistema', {}),
+            productividad=data.get('productividad', 'unproductive')
+        )
+
+        return Response({
+            'message': 'Actividad registrada exitosamente',
+            'actividad_id': actividad.id,
+            'timestamp': actividad.timestamp.isoformat()
+        })
+
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 def analizar_intencion_mensaje(mensaje):
     """Analiza la intención del mensaje del usuario"""
     mensaje_lower = mensaje.lower()

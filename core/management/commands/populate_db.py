@@ -114,8 +114,7 @@ class Command(BaseCommand):
                         'nivel': random.choice(['bajo', 'medio', 'alto']),
                         'descripcion': f'Análisis de productividad día {i}'
                     },
-                    'recomendacion': f'Recomendación personalizada {i} para {usuario.username}',
-                    'severidad': random.choice(['baja', 'media', 'alta'])
+                    'recomendacion': f'Recomendación personalizada {i} para {usuario.username}'
                 }
             )
 
@@ -134,6 +133,8 @@ class Command(BaseCommand):
                 defaults={
                     'ventana_activa': random.choice(aplicaciones),
                     'productividad': random.choice(['productive', 'unproductive', 'neutral', 'gaming']),
-                    'tiempo_activo': random.randint(30, 300)  # 30 segundos a 5 minutos
+                    'machine_id': f'machine_{usuario.id}',
+                    'procesos_activos': ['explorer.exe', 'chrome.exe', 'code.exe'],
+                    'carga_sistema': {'cpu': random.randint(10, 80), 'memoria': random.randint(20, 90)}
                 }
             )
